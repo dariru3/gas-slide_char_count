@@ -18,17 +18,29 @@ function countCharacters() {
     
     for (var j = 0; j < textElements.length; j++) {
       var shape = textElements[j].asShape();
-      var textRange = shape.getText();
-      var content = textRange.asRenderedString();
-      totalSlideCharacters += content.length;
+      try {
+        var textRange = shape.getText();
+        var content = textRange.asRenderedString();
+        totalSlideCharacters += content.length;
+      } catch (error) {
+        // If the shape does not have a text component, skip it
+      }
     }
     
     // Count characters in notes
     var notesPage = slide.getNotesPage();
-    var notesShape = notesPage.getPlaceholder(SlidesApp.PlaceholderType.BODY);
-    if (notesShape) {
-      var notesText = notesShape.asShape().getText().asString();
-      totalNoteCharacters += notesText.length;
+    var notesShapes = notesPage.getPageElements().filter(function(element) {
+      return element.getPageElementType() === SlidesApp.PageElementType.SHAPE;
+    });
+    
+    for (var k = 0; k < notesShapes.length; k++) {
+      var notesShape = notesShapes[k].asShape();
+      try {
+        var notesText = notesShape.getText().asString();
+        totalNoteCharacters += notesText.length;
+      } catch (error) {
+        // If the shape does not have a text component, skip it
+      }
     }
   }
   
