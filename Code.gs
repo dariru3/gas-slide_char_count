@@ -1,7 +1,5 @@
 function getAllCounts(){
-  var urls = [
-    ""
-    ]
+  var urls = []
   for (i=0; i<urls.length; i++){
     countCharacters(urls[i]);
   }
@@ -9,8 +7,11 @@ function getAllCounts(){
 
 function countCharacters(url) {
   // Access the active presentation and its slides
-  var presentation = SlidesApp.openByUrl(url)
   // var presentation = SlidesApp.getActivePresentation();
+
+  // Open by URL
+  var presentation = SlidesApp.openByUrl(url)
+
   var slides = presentation.getSlides();
   
   // Initialize a variable to store the total character count
