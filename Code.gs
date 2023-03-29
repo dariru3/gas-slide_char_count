@@ -20,7 +20,8 @@ function countCharacters() {
       var shape = textElements[j].asShape();
       try {
         var textRange = shape.getText();
-        var content = textRange.asRenderedString();
+        var content = textRange.asRenderedString().replace(/\s+/g, '');
+        console.log(content, content.length)
         totalSlideCharacters += content.length;
       } catch (error) {
         // If the shape does not have a text component, skip it
@@ -36,7 +37,8 @@ function countCharacters() {
     for (var k = 0; k < notesShapes.length; k++) {
       var notesShape = notesShapes[k].asShape();
       try {
-        var notesText = notesShape.getText().asString();
+        var notesText = notesShape.getText().asString().replace(/\s+/g, '');
+        console.log(notesText, notesText.length)
         totalNoteCharacters += notesText.length;
       } catch (error) {
         // If the shape does not have a text component, skip it
