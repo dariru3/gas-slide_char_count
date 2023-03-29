@@ -1,6 +1,16 @@
-function countCharacters() {
+function getAllCounts(){
+  var urls = [
+    ""
+    ]
+  for (i=0; i<urls.length; i++){
+    countCharacters(urls[i]);
+  }
+}
+
+function countCharacters(url) {
   // Access the active presentation and its slides
-  var presentation = SlidesApp.getActivePresentation();
+  var presentation = SlidesApp.openByUrl(url)
+  // var presentation = SlidesApp.getActivePresentation();
   var slides = presentation.getSlides();
   
   // Initialize a variable to store the total character count
@@ -47,6 +57,8 @@ function countCharacters() {
   }
   
   // Log the total character count
+  Logger.log("File name: " + presentation.getName());
   Logger.log("Total characters in the slides: " + totalSlideCharacters);
   Logger.log("Total characters in the notes: " + totalNoteCharacters);
+  Logger.log("Number of slides: " + slides.length);
 }
